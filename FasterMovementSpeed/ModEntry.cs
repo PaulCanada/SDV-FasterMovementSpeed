@@ -7,40 +7,38 @@ namespace FasterMovementSpeed
 {
     class ModEntry : Mod
     {
-
-        private const int movementSpeed = 3;
-        private const int originalAddedSpeed = 0;
-        private bool isActive = false;
-
+        private ModConfig config;
         private void GameEvents_UpdateTick(object sender, EventArgs args)
         {
-            if (isActive)
+            if (this.config.isActive)
             {
-                Game1.player.addedSpeed = movementSpeed;
-            } else
+                Game1.player.addedSpeed = this.config.speedAmount;
+            }
+            else
             {
-                Game1.player.addedSpeed = originalAddedSpeed;
+                Game1.player.addedSpeed = 0;
             }
         }
 
-        private void ControlButtons_KeyPress(object sender, EventArgsKeyPressed key)
+        private void InputButtons_ButtonPressed(object sender, EventArgsInput key)
         {
             if (Context.IsPlayerFree)
             {
-                if (key.KeyPressed.ToString().Equals("H"))
+                if (key.Button.ToString().Equals("H"))
                 {
-                    isActive = !isActive;
-                    Monitor.Log("Toggling extra speed to " + isActive + ".");
+                    this.config.isActive = !this.config.isActive;
+                    Monitor.Log("Toggling extra speed to " + this.config.isActive + ".");
+                    this.Helper.WriteConfig(config);
                 }
             }
-
         }
 
 
         public override void Entry(IModHelper helper)
         {
+            this.config = (ModConfig)helper.ReadConfig<ModConfig>();
             GameEvents.UpdateTick += GameEvents_UpdateTick;
-            ControlEvents.KeyPressed += ControlButtons_KeyPress;
+            InputEvents.ButtonPressed += InputButtons_ButtonPressed;
         }
     }
 }
