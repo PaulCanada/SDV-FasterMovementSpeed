@@ -1,0 +1,10 @@
+{
+  "Name": "Faster Movement Speed",
+  "Author": "Paul Canada",
+  "Version": "1.0.1",
+  "Description": "Changes the base speed of the player.",
+  "UniqueID": "paulcanada.fastermovementspeed",
+  "EntryDll": "FasterMovementSpeed.dll",
+  "MinimumApiVersion": "2.0",
+  "UpdateKeys": []
+}
