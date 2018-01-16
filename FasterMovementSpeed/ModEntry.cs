@@ -13,9 +13,15 @@ namespace FasterMovementSpeed
         private bool isActive = false;
 
         private void GameEvents_UpdateTick(object sender, EventArgs args)
+
         {
-            if (isActive)
+            if (this.config.isActive)
             {
+                Game1.player.addedSpeed = this.config.speedAmount;
+            }
+            else
+            {
+
                 Game1.player.addedSpeed = movementSpeed;
             } else
             {
@@ -27,11 +33,13 @@ namespace FasterMovementSpeed
         {
             if (Context.IsPlayerFree)
             {
+
                 if (key.KeyPressed.ToString().Equals("H"))
                 {
                     isActive = !isActive;
                     Monitor.Log("Toggling extra speed to " + isActive + ".");
                 }
+
             }
 
         }
@@ -39,8 +47,11 @@ namespace FasterMovementSpeed
 
         public override void Entry(IModHelper helper)
         {
-            GameEvents.UpdateTick += GameEvents_UpdateTick;
-            ControlEvents.KeyPressed += ControlButtons_KeyPress;
+
+            GameEvents.QuarterSecondTick += GameEvents_QuarterTick;
+            ControlEvents.KeyPressed += InputButtons_KeyPress;
+            this.config = (ModConfig)helper.ReadConfig<ModConfig>();
+
         }
     }
 }
