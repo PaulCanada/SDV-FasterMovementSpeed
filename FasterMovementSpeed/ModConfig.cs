@@ -5,16 +5,11 @@ using StardewValley;
 
 namespace FasterMovementSpeed
 {
-    class ModConfig : Mod
+    internal class ModConfig 
     {
 
         public bool isActive { get; set; } = false;
         public int speedAmount { get; set; } = 3;
 
-        public override void Entry(IModHelper helper)
-        {
-            ModConfig config = helper.ReadConfig<ModConfig>();
-
-        }
     }
 }
