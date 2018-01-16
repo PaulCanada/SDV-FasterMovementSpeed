@@ -12,6 +12,7 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Mod specifics
 /FasterMovementSpeed/Properties
 *.sln
 *.csproj
