@@ -19,9 +19,9 @@ namespace FasterMovementSpeed
             }
         }
 
-        private void InputButtons_KeyPress(object sender, EventArgsKeyPressed key)
+        private void InputButtons_KeyPress(object sender, EventArgsInput key)
         {
-            if (key.KeyPressed.Equals("H"))
+            if (key.Button.Equals("H"))
             {
                 isActive = !isActive;
                 Monitor.Log("Toggling extra speed to " + isActive + ".");
@@ -32,7 +32,7 @@ namespace FasterMovementSpeed
         public override void Entry(IModHelper helper)
         {
             GameEvents.QuarterSecondTick += GameEvents_QuarterTick;
-            ControlEvents.KeyPressed += InputButtons_KeyPress;
+            InputEvents.ButtonPressed += InputButtons_KeyPress;
         }
     }
 }
