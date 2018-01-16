@@ -24,6 +24,7 @@ namespace FasterMovementSpeed
             if (key.KeyPressed.Equals("H"))
             {
                 isActive = !isActive;
+                Monitor.Log("Toggling extra speed to " + isActive + ".");
             }
         }
 
