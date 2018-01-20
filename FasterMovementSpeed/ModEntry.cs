@@ -2,11 +2,14 @@ using System;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using StardewValley.Menus;
+using FasterMovementSpeed.Framework;
 
 namespace FasterMovementSpeed
 {
     class ModEntry : Mod
     {
+
         private ModConfig config;
         private void GameEvents_UpdateTick(object sender, EventArgs args)
         {
@@ -24,15 +27,25 @@ namespace FasterMovementSpeed
         {
             if (Context.IsPlayerFree)
             {
+                if (Game1.activeClickableMenu != null || Game1.CurrentEvent != null)
+                {
+                    return;
+                }
+
                 if (key.Button.ToString().Equals("H"))
                 {
+                    Game1.activeClickableMenu = (IClickableMenu)new ConfigMenu(this.config);
+                    Monitor.Log("Toggling extra speed to " + this.config.isActive + ".");
+                    this.config.isActive = !this.config.isActive;
+
+                    /*
                     this.config.isActive = !this.config.isActive;
                     Monitor.Log("Toggling extra speed to " + this.config.isActive + ".");
                     this.Helper.WriteConfig(config);
+                    */
                 }
             }
         }
-
 
         public override void Entry(IModHelper helper)
         {
